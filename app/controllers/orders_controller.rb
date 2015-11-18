@@ -19,14 +19,13 @@ class OrdersController < ApplicationController
 
   def add
     @order = Order.find(params[:id])
-    order_item = @order.order_item.build(item_id: params[:item_id])
+    order_item = @order.order_items.build(item_id: params[:item_id])
 
     if order_item.save
       render json: order_item, status: :created
     else
       render json: order_item.errors, status: :unprocessable_entity
     end
-
   end
 
   private
